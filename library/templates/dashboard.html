@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h3>Available Books / Movies</h3>
+
+<!-- SEARCH -->
+<form method="get" action="/search" class="row mb-3">
+    <div class="col">
+        <input class="form-control" name="name" placeholder="Book Name">
+    </div>
+    <div class="col">
+        <input class="form-control" name="author" placeholder="Author">
+    </div>
+    <div class="col">
+        <button class="btn btn-primary">Search</button>
+    </div>
+</form>
+
+{% if error %}
+<p class="text-danger">{{ error }}</p>
+{% endif %}
+
+<!-- TABLE -->
+<table class="table table-bordered">
+    <tr>
+        <th>Code</th>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Type</th>
+        <th>Qty</th>
+        <th>Action</th>
+    </tr>
+
+    {% for item in items %}
+    <tr>
+        <td>{{ item.code }}</td>
+        <td>{{ item.title }}</td>
+        <td>{{ item.author }}</td>
+        <td>{{ item.item_type }}</td>
+        <td>{{ item.quantity }}</td>
+        <td>
+            <a href="/issue/{{ item.id }}" class="btn btn-success btn-sm">Issue</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}
